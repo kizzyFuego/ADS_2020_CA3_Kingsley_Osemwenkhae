@@ -28,14 +28,7 @@ class Order
     
     
     public:
-    Order( string name,
-    double price,
-    int quantity,
-    string country,
-    string region,
-    string currency,
-    string orderDate,
-    string deliveryDate )
+    Order( string name, double price, int quantity, string country, string region, string currency, string orderDate, string deliveryDate )
     {
         this->name = name;
         this->price = price;

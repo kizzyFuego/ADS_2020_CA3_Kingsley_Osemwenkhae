@@ -30,20 +30,20 @@ template <class T>
 class OutputNodeHTML : public Node<T> {
     
 private:
-    T output;
+    string output;
     
 public:
     void setData(string data)
     {
-        
+        this->output = data;
     }
     
     void process(T& orders) override {
-        this->output = orders;
+        cout << this->output << endl;
     }
     
     
-    list<Order> getOutput()
+    string getOutput()
     {
         return this->output;
     }

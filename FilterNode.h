@@ -37,7 +37,7 @@ public:
     void setData(string data)
     {
         this->data = data;
-        cout << data << endl;
+        //cout << data << endl;
     }
     
     void process(T& orders )
@@ -93,7 +93,6 @@ public:
        
         
         if (this->getNext() != nullptr)
-            cout << "END" << endl;
             this->getNext()->process(orders);
         
         
