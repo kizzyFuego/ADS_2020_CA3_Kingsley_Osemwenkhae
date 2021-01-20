@@ -15,6 +15,8 @@
 #include "OutputNodeHTML.h"
 #include "Order.h"
 #include "RegionSortNode.h"
+#include "PopularProductSortNode.h"
+#include "ProductCSVNode.h"
 #include <list>
 
 using namespace std;
@@ -33,8 +35,10 @@ int main(int argc, const char * argv[]) {
     //OutputNodeHTML<list<Order>>* outputNode = new OutputNodeHTML<list<Order>>();
     //OutputNodeHTML<list<Order>> outputNode = new OutputNodeHTML<list<Order>>();
     //output
-    RegionSortNode<list<Order>>* regionSort = new RegionSortNode<list<Order>>();
     
+    //RegionSortNode<list<Order>>* regionSort = new RegionSortNode<list<Order>>();
+    //PopularProductSortNode<list<Order>>* regionSort = new PopularProductSortNode<list<Order>>();
+    ProductCSVNode<list<Order>>* regionSort = new ProductCSVNode<list<Order>>();
     
     OutputNodeHTML<list<Order>>* outputNode = new OutputNodeHTML<list<Order>>();
     
@@ -42,6 +46,10 @@ int main(int argc, const char * argv[]) {
     
     inputNode->process(orders);
     
+    // open a file in write mode.
+    ofstream outfile;
+    outfile.open("/Users/kizzy/Desktop/11.csv");
+    outfile <<  outputNode->getOutput() << endl;
     
     //for(Order order : outputNode->getOutput())
     //{

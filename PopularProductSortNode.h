@@ -21,7 +21,7 @@ using namespace std;
 
 /// @brief outputnode
 template <class T>
-class RegionSortNode : public Node<T> {
+class PopularProductSortNode : public Node<T> {
     
 private:
     T output;
@@ -38,34 +38,26 @@ public:
         return (region1.region < region2.region);
     }
     
-    bool cmp(const Region &a, const Region &b)
-    {
-        return a < b;
-    }
-    
     
     
     void process(T& orders) override {
         
-        list<Region> regions;
+        list<PopularProduct> products;
         //int count = 0;
         
         for( Order order : orders )
         {
-            bool regionPresent = false;
+            bool productPresent = false;
             
-            for( Region &region : regions )
+            for( PopularProduct &product : products )
             {
-                if( region.region == order.region )
+                if( product.name == order.name )
                 {
                     //count++;
-                    regionPresent = true;
+                    productPresent = true;
                     
-                    region.salesVolume = region.salesVolume + 1;
-                    
-                    region.salesValue = region.salesValue + (order.price * order.quantity);
-                    
-                    region.totalProductPrice = region.totalProductPrice + order.price;
+                    product.countryMap[order.country] = product.countryMap[order.country] + order.quantity;
+                    //if( product.countryMap[order.country] != 0 )
                     
                     //if( region.avgYearlyPrice )
                     //{
@@ -74,14 +66,13 @@ public:
                 }
             }
             
-            if (!regionPresent)
+            if (!productPresent)
             {
-                Region region = Region();
-                region.region = order.region;
-                region.salesVolume += 1;
-                region.salesValue += order.price * order.quantity;
-                region.totalProductPrice += order.price;
-                regions.push_back(region);
+                PopularProduct product = PopularProduct();
+                product.name = order.name;
+                product.region = order.region;
+                product.countryMap[order.country] = order.quantity;
+                products.push_back(product);
                 //
             }
             //cout << "total region: " << count << endl;
@@ -93,18 +84,19 @@ public:
         //Region comp = Region();
         
         //sort(regions.begin(), regions.end() [](Region().region a, Region().region b){return a < b});
-        //sort(regions.begin(), regions.end(), this->cmp );
-        regions.sort();
+        //sort(regions.begin(), regions.end() );
         
-        string html = "<html><h2>Region Sorting</h2>";
-        for( Region region : regions )
+        string html = "<html><h2>Popular Product Sorting</h2>";
+        for( PopularProduct product : products )
         {
-            double avg = region.totalProductPrice / region.salesVolume;
-            region.print();
-            html += "<h4>"+region.region+"</h4>";
-            html += "<p><li>Sales Volume: "+to_string(region.salesVolume) + "</li></p>";
-            html += "<p><li>Sales Value: "+to_string(region.salesValue) + "</li></p>";
-            html += "<p><li>Avg Product Price: "+to_string(avg) + "</li></p></html>";
+            //double avg = region.totalProductPrice / region.salesVolume;
+            //region.print();
+            html += "<h4>"+product.name+"</h4>";
+            for (map<string,int>::iterator it=product.countryMap.begin(); it!=product.countryMap.end(); ++it)
+                html += "<p><li>"+it->first+": "+to_string(it->second) + "</li></p>";
+               //std::cout << it->first << " => " << it->second << '\n';
+            
+            html += "<html>";
         }
         
         
@@ -120,4 +112,5 @@ public:
         return this->output;
     }
 };
+
 

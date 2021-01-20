@@ -39,7 +39,7 @@ public:
     }
     
     void process(T& orders) override {
-        cout << this->output << endl;
+        cout << this->output;
     }
     
     
