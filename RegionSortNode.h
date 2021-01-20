@@ -100,7 +100,7 @@ public:
         for( Region region : regions )
         {
             double avg = region.totalProductPrice / region.salesVolume;
-            region.print();
+            //region.print();
             html += "<h4>"+region.region+"</h4>";
             html += "<p><li>Sales Volume: "+to_string(region.salesVolume) + "</li></p>";
             html += "<p><li>Sales Value: "+to_string(region.salesValue) + "</li></p>";

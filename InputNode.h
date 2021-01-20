@@ -22,15 +22,19 @@ using namespace std;
 template <class T>
 class InputNode : public Node<T> {
     
+private:
+    string data;
+    
 public:
     void setData(string data)
     {
-        
+        this->data = data;
     }
     
     void process( T& orders )
     {
-        string fileLocation = "/Users/kizzy/OneDrive - Dundalk Institute of Technology/Year3/Algorithms and Data Structures/exam/sales_100.txt";
+        //string fileLocation = "/Users/kizzy/OneDrive - Dundalk Institute of Technology/Year3/Algorithms and Data Structures/exam/sales_100.txt";
+        string fileLocation = this->data;
         
         ifstream inStream(fileLocation); //
         
