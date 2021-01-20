@@ -17,6 +17,7 @@
 #include "RegionSortNode.h"
 #include "PopularProductSortNode.h"
 #include "ProductCSVNode.h"
+#include "TimeUtility.h"
 #include <list>
 
 using namespace std;
@@ -43,31 +44,35 @@ int main(int argc, const char * argv[]) {
         if( option =="1" )
         {
             string fileLocation;
-            cout << "Input Complete File Path? (y/n): ";
+            cout << "Read From Default File? (y/n): ";
             string option;
             cin >> option;
-            if( option == "y" or option == "yes" )
+            if( option == "n" or option == "no" )
             {
                 cout << "File Directory> ";
                 cin >> fileLocation;
             }
             else
             {
-                string fileLocation = "/Users/kizzy/OneDrive - Dundalk Institute of Technology/Year3/Algorithms and Data Structures/exam/sales_100.txt";
+                fileLocation = "/Users/kizzy/OneDrive - Dundalk Institute of Technology/Year3/Algorithms and Data Structures/exam/sales_100.txt";
             }
             
             list<Order> orders;
-            //auto inputNodeAtt = [upperPriceLimit](Bike bike) { return bike.price < upperPriceLimit; };
+            
             InputNode<list<Order>>* inputNode = new InputNode<list<Order>>();
+            cout << "\n" << typeid(inputNode).name() << " is " << sizeof(inputNode) << " bytes in size!" << endl;
+            
             FilterNode<list<Order>>* filterNode = new FilterNode<list<Order>>();
-            RegionSortNode<list<Order>>* regionSort = new RegionSortNode<list<Order>>();
-            //PopularProductSortNode<list<Order>>* regionSort = new PopularProductSortNode<list<Order>>();
-            //ProductCSVNode<list<Order>>* regionSort = new ProductCSVNode<list<Order>>();
+            cout << "\n" << typeid(filterNode).name() << " is " << sizeof(filterNode) << " bytes in size!" << endl;
+            
+            RegionSortNode<list<Order>>* sortNode = new RegionSortNode<list<Order>>();
+            cout << "\n" << typeid(sortNode).name() << " is " << sizeof(sortNode) << " bytes in size!" << endl;
             
             OutputNode<list<Order>>* outputNode = new OutputNode<list<Order>>();
+            cout << "\n" << typeid(outputNode).name() << " is " << sizeof(outputNode) << " bytes in size!" << endl;
             
             //connecting the node
-            inputNode->setNext(filterNode)->setNext(regionSort)->setNext(outputNode);
+            inputNode->setNext(filterNode)->setNext(sortNode)->setNext(outputNode);
             
             inputNode->setData(fileLocation);
             //process the node
@@ -83,10 +88,10 @@ int main(int argc, const char * argv[]) {
         else if( option == "2" )
         {
             string fileLocation;
-            cout << "Input Complete File Path? (y/n): ";
+            cout << "Read From Default File? (y/n): ";
             string option;
             cin >> option;
-            if( option == "y" or option == "yes" )
+            if( option == "n" or option == "no" )
             {
                 cout << "File Directory> ";
                 cin >> fileLocation;
@@ -97,14 +102,19 @@ int main(int argc, const char * argv[]) {
             }
 
             list<Order> orders;
-            //auto inputNodeAtt = [upperPriceLimit](Bike bike) { return bike.price < upperPriceLimit; };
+            
             InputNode<list<Order>>* inputNode = new InputNode<list<Order>>();
+            cout << "\n" << typeid(inputNode).name() << " is " << sizeof(inputNode) << " bytes in size!" << endl;
+            
             FilterNode<list<Order>>* filterNode = new FilterNode<list<Order>>();
-            //RegionSortNode<list<Order>>* sortNode = new RegionSortNode<list<Order>>();
+            cout << "\n" << typeid(filterNode).name() << " is " << sizeof(filterNode) << " bytes in size!" << endl;
+            
+            
             PopularProductSortNode<list<Order>>* sortNode = new PopularProductSortNode<list<Order>>();
-            //ProductCSVNode<list<Order>>* sortNode = new ProductCSVNode<list<Order>>();
+            cout << "\n" << typeid(sortNode).name() << " is " << sizeof(sortNode) << " bytes in size!" << endl;
 
             OutputNode<list<Order>>* outputNode = new OutputNode<list<Order>>();
+            cout << "\n" << typeid(outputNode).name() << " is " << sizeof(outputNode) << " bytes in size!" << endl;
 
             //connecting the node
             inputNode->setNext(filterNode)->setNext(sortNode)->setNext(outputNode);
@@ -123,10 +133,10 @@ int main(int argc, const char * argv[]) {
         else if( option == "3" )
         {
             string fileLocation;
-            cout << "Input Complete File Path? (y/n): ";
+            cout << "Read From Default File? (y/n): ";
             string option;
             cin >> option;
-            if( option == "y" or option == "yes" )
+            if( option == "n" or option == "no" )
             {
                 cout << "File Directory> ";
                 cin >> fileLocation;
@@ -139,12 +149,17 @@ int main(int argc, const char * argv[]) {
             list<Order> orders;
             //auto inputNodeAtt = [upperPriceLimit](Bike bike) { return bike.price < upperPriceLimit; };
             InputNode<list<Order>>* inputNode = new InputNode<list<Order>>();
+            
+            cout << "\n" << typeid(inputNode).name() << " is " << sizeof(inputNode) << " bytes in size!" << endl;
+            
             FilterNode<list<Order>>* filterNode = new FilterNode<list<Order>>();
-            //RegionSortNode<list<Order>>* regionSort = new RegionSortNode<list<Order>>();
-            //PopularProductSortNode<list<Order>>* regionSort = new PopularProductSortNode<list<Order>>();
+            cout << typeid(filterNode).name() << " is " << sizeof(filterNode) << " bytes in size!" << endl;
+            
             ProductCSVNode<list<Order>>* sortNode = new ProductCSVNode<list<Order>>();
+            cout << typeid(sortNode).name() << " is " << sizeof(sortNode) << " bytes in size!" << endl;
 
             OutputNode<list<Order>>* outputNode = new OutputNode<list<Order>>();
+            cout << typeid(outputNode).name() << " is " << sizeof(outputNode) << " bytes in size!" << endl;
 
             //connecting the node
             inputNode->setNext(filterNode)->setNext(sortNode)->setNext(outputNode);
@@ -164,8 +179,6 @@ int main(int argc, const char * argv[]) {
         }
         option = menu();
     }
-    
-    
     
     return 0;
 }
